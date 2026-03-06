@@ -18,6 +18,12 @@
     <LibraryReferences>{4555e11c-ffe2-4fca-a1a1-6f66c4940b87}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FBs\FB_Lampe.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FBs\FB_Manager.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="FBs\FB_Valve.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -29,6 +35,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\PRG_System.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="PRG_System" Id="{a5834bc9-6fa4-4e22-ba47-90d358dbf99f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PRG_System
+VAR
+    fbManager : FB_Manager;
+
+    lampe1 : FB_Lampe;
+    lampe2 : FB_Lampe;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[lampe1.Init(fbManager);
+lampe2.Init(fbManager);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

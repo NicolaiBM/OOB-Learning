@@ -13,6 +13,7 @@ VAR
 	tOff:				TOF;
 	tOnTime:			TIME;
 	tOffTime:			TIME;
+	bReqState:			BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>

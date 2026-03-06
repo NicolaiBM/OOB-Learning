@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Lampe" Id="{edafe033-5ac6-417f-a87d-e7aa768ed594}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Lampe
+VAR
+    bOn : BOOL;
+    bInit : BOOL := FALSE;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Init" Id="{cd5fdcba-8a5d-4724-ba83-73815cb7a11c}">
+      <Declaration><![CDATA[METHOD Init
+VAR_INPUT
+    fbManager : REFERENCE TO FB_Manager;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT bInit THEN
+    fbManager.Register(THIS);
+    bInit := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

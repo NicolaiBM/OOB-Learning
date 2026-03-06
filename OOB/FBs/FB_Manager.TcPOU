@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Manager" Id="{398e2c49-d1e7-4f1a-a149-f2a637033df5}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Manager
+VAR
+    arrLamper : ARRAY[1..10] OF POINTER TO FB_Lampe;
+    iCount    : INT := 0;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Register" Id="{15aefec3-c231-4718-8dcc-dbc8b81c352a}">
+      <Declaration><![CDATA[METHOD Register
+VAR_INPUT
+    pLampe : POINTER TO FB_Lampe;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF iCount < 10 THEN
+    iCount := iCount + 1;
+    arrLamper[iCount] := pLampe;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SlukAlle" Id="{3efb883d-f8f3-49bb-9437-e701be26ec8d}">
+      <Declaration><![CDATA[METHOD SlukAlle
+VAR
+    i : INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[FOR i := 1 TO iCount DO
+    arrLamper[i]^.bOn := FALSE;
+END_FOR]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

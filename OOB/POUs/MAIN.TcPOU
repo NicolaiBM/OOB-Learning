@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{6dbe50d1-c61c-4b3b-8c13-53fcd0f25ec9}">
+  <POU Name="MAIN" Id="{6dbe50d1-c61c-4b3b-8c13-53fcd0f25ec9}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbValveHotWater:	FB_Valve;
+	fbValveColdWater:	FB_Valve;
+	fbValveBypass:		FB_Valve;
+	bValve:		BOOL;
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[fbValveHotWater(bIn:=TRUE, bOut=>bValve);]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
