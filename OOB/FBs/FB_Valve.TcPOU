@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Valve" Id="{84654fb9-337d-4cee-9e24-3b1893c5f8a4}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Valve
+VAR_INPUT
+	bIn:				BOOL;
+END_VAR
+VAR_OUTPUT
+	bOut AT %Q*:		BOOL;
+END_VAR
+VAR
+	tOn:				TON;
+	tOff:				TOF;
+	tOnTime:			TIME;
+	tOffTime:			TIME;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Process.eCtrlMode OF
+	
+	(*
+	 *	Idle mode: This mode offers no control.
+	 *)
+	E_CTRL_MODE.eCTRL_MODE_IDLE:
+		tOn(IN:=FALSE);
+		tOff(IN:=FALSE);
+		bOut:=FALSE;
+		
+	(*
+	 *	Manual mode: This mode offers direct control from the admin
+	 *	this has no delay.
+	 *)
+	E_CTRL_MODE.eCTRL_MODE_MANUAL:
+		tOn(IN:=FALSE);
+		tOff(IN:=FALSE);
+		bOut:=bIn;
+		
+	(*
+	 *	Auto mode: This mode allows for the FB to be set up with
+	 *	ON-delay and OFF-delay
+	 *)
+	E_CTRL_MODE.eCTRL_MODE_ACTIVE:
+		tOn (IN:=bIn, PT:=tOnTime);
+		tOff (IN:=bIn, PT:=tOffTime);
+		CASE TO_INT(bOut) OF
+			0:
+				IF tOn.Q THEN
+					bOut:=TRUE;
+				END_IF
+			1:
+				IF NOT tOff.Q THEN
+					bOut:=FALSE;
+				END_IF
+		END_CASE
+ELSE
+	(*
+	 *	Fail-state or invalid mode: Valve-default is off
+	 *)
+	tOn(IN:=FALSE);
+	tOff(IN:=FALSE);
+	bOut:=FALSE;
+END_CASE]]></ST>
+    </Implementation>
+    <Method Name="Init" Id="{eba7a80d-9fdd-425c-bfeb-122023cbdf19}">
+      <Declaration><![CDATA[METHOD Init : BOOL
+VAR_INPUT
+	tOnTimeInit:	TIME:=T#10S;
+	tOffTimeInit:	TIME:=T#10s;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[tOnTime:=tOnTimeInit;
+tOffTime:=tOffTimeInit;
+Init:=TRUE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

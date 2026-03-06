@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="Process" Id="{05de5d22-62de-47a9-b2e6-3f00f60e2b77}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	// Defaulting auto mode.
+	eCtrlMode:				E_CTRL_MODE:=E_CTRL_MODE.eCTRL_MODE_ACTIVE;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
